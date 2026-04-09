@@ -1,73 +1,28 @@
-# Spring Boot Application
+# Order Management Service
 
-This is a simple Spring Boot application that demonstrates the basic structure and functionality of a Spring Boot project.
+A Spring Boot order management microservice with REST, JPA, H2, validation, actuator, OpenAPI, and RFC 7807 error handling.
 
-## Project Structure
+## Run Locally
 
-```
-spring-boot-app
-├── src
-│   ├── main
-│   │   ├── java
-│   │   │   └── com
-│   │   │       └── example
-│   │   │           └── springbootapp
-│   │   │               ├── SpringBootAppApplication.java
-│   │   │               └── controller
-│   │   │                   └── HelloController.java
-│   │   └── resources
-│   │       ├── application.properties
-│   │       └── static
-│   │           └── index.html
-│   └── test
-│       └── java
-│           └── com
-│               └── example
-│                   └── springbootapp
-│                       └── SpringBootAppApplicationTests.java
-├── pom.xml
-└── README.md
-```
+```bash
+mvn clean spring-boot:run
 
-## Prerequisites
 
-- Java 11 or higher
-- Maven
+OpenAPI / Swagger
+OpenAPI UI:
 
-## Build and Run
+http://localhost:8080/swagger-ui.html
+API docs:
 
-1. Clone the repository:
-   ```
-   git clone <repository-url>
-   cd spring-boot-app
-   ```
+http://localhost:8080/v3/api-docs
+H2 Console
+H2 console:
 
-2. Build the application using Maven:
-   ```
-   mvn clean install
-   ```
+http://localhost:8080/h2-console
+JDBC URL:
 
-3. Run the application:
-   ```
-   mvn spring-boot:run
-   ```
+jdbc:h2:mem:orders
+Actuator
+Health endpoint:
 
-4. Access the application in your web browser at:
-   ```
-   http://localhost:8080/hello
-   ```
-
-## Endpoints
-
-- **GET /hello**: Returns a greeting message.
-
-## Testing
-
-To run the tests, use the following command:
-```
-mvn test
-```
-
-## License
-
-This project is licensed under the MIT License.
+http://localhost:8080/actuator/health
