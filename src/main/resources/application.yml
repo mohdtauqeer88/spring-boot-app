@@ -10,9 +10,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+      show-sql: true
+      hibernate.format_sql: true
     properties:
       hibernate:
-        '[format_sql]': true
+        '[format_sql]': true        
   h2:
     console:
       enabled: true

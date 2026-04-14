@@ -20,4 +20,7 @@ public interface OrderService {
     OrderResponse updateOrder(UUID orderId, OrderUpdateRequest request);
 
     void cancelOrder(UUID orderId);
+
+    OrderResponse getOrderByOrderNumber(String orderNumber);
+
 }

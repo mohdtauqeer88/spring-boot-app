@@ -40,17 +40,17 @@ public class OrderController {
         return ResponseEntity.created(location).body(response);
     }
 
-    @Operation(summary = "Retrieve order by ID")
+   /*  @Operation(summary = "Retrieve order by ID")
     @GetMapping("/{id}")
-    public ResponseEntity<OrderResponse> getOrderById(@PathVariable UUID id) {
+    public ResponseEntity<OrderResponse> getOrderById(@PathVariable("id") UUID id) {
         return ResponseEntity.ok(orderService.getOrderById(id));
-    }
+    }*/
 
     @Operation(summary = "Search orders with optional status filtering")
     @GetMapping
     public ResponseEntity<Page<OrderResponse>> searchOrders(
             @Parameter(description = "Filter orders by status")
-            @RequestParam(required = false) OrderStatus status,
+            @RequestParam(name = "status", required = false) OrderStatus status,
             @ParameterObject Pageable pageable) {
         return ResponseEntity.ok(orderService.searchOrders(status, pageable));
     }
@@ -58,15 +58,21 @@ public class OrderController {
     @Operation(summary = "Update order details")
     @PutMapping("/{id}")
     public ResponseEntity<OrderResponse> updateOrder(
-            @PathVariable UUID id,
+            @PathVariable("id") UUID id,
             @Valid @RequestBody OrderUpdateRequest request) {
         return ResponseEntity.ok(orderService.updateOrder(id, request));
     }
 
     @Operation(summary = "Cancel order (soft delete)")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> cancelOrder(@PathVariable UUID id) {
+    public ResponseEntity<Void> cancelOrder(@PathVariable("id") UUID id) {
         orderService.cancelOrder(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Retrieve order by Order Number")
+    @GetMapping("/{orderNumber}")
+    public ResponseEntity<OrderResponse> getOrderByOrderNumber(@PathVariable("orderNumber") String orderNumber) {
+        return ResponseEntity.ok(orderService.getOrderByOrderNumber(orderNumber));
     }
 }

@@ -101,6 +101,13 @@ public class OrderServiceImpl implements OrderService {
         log.info("Cancelled order {}", existingOrder.getOrderNumber());
     }
 
+    @Override
+    public OrderResponse getOrderByOrderNumber(String orderNumber) {
+        return orderRepository.findByOrderNumber(orderNumber)
+                .map(OrderMapper::toResponse)
+                .orElseThrow(() -> new ResourceNotFoundException("Order with number " + orderNumber + " not found"));
+    }
+
     private Order resolveOrder(UUID orderId) {
         return orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order with id " + orderId + " not found"));
@@ -111,4 +118,6 @@ public class OrderServiceImpl implements OrderService {
         int suffix = ThreadLocalRandom.current().nextInt(1000, 9999);
         return "ORD-" + timestamp + "-" + suffix;
     }
+
+   
 }
